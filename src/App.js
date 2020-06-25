@@ -6,9 +6,11 @@ import BlogPosts from './components/BlogPosts';
 import BlogPost from './components/BlogPost';
 import Nav from './components/Nav';
 import NewBlogPost from './components/NewBlogPost';
+import Register from './components/Register';
+import Login from './components/Login';
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState('Alex');
   const [blogPosts, setBlogPosts] = useState([]);
   useEffect(() => {
     setBlogPosts(blogData);
@@ -29,6 +31,12 @@ const App = () => {
   const handleLogOut = () => {
     setLoggedInUser(null);
   }
+  
+  const handleRegister = (user, history) => {
+    const {username} = user;
+    setLoggedInUser(username);
+    history.push('/')
+  }
 
   return (
     <div >
@@ -40,6 +48,12 @@ const App = () => {
         render={(props) => <BlogPosts {...props} postData={blogPosts} />}
         />
       
+      <Route exact path ='/register'
+      render = {(props) => <Register {...props} handleRegister={handleRegister} />}
+      />
+      <Route exact path ='/login'
+      render = {(props) => <Login {...props} handleLogin={handleRegister} />}
+      />
       <Route exact path ='/posts/new'
       render = {(props) => <NewBlogPost {...props}  getNextId={getNextId()} addBlogPost={addBlogPost} />}
       />

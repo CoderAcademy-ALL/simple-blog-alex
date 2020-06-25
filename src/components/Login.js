@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-function Register(props) {
-    const {handleRegister, history} = props;
+function Login(props) {
+    const {handleLogin, history} = props;
     const initalState = {
         username: '',
         email: '',
@@ -17,8 +17,7 @@ function Register(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleRegister(formState, history)
-        
+        handleLogin(formState, history)
     }
 
     const divStyles = {
@@ -48,11 +47,10 @@ function Register(props) {
                 <label style={labelStyles}>Password </label>
                 <input style={inputStyles} type='password' name='password' onChange={handleChange} value={formState.password}></input>
                 </div>
-                <input type='submit' value='Register' />
+                <input type='submit' value='Login' />
             </form>
             
         </div>
     )
-}
-
-export default Register;
+    }
+export default Login;

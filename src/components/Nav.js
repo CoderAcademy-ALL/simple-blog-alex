@@ -13,19 +13,33 @@ function Nav(props) {
         color: 'black',
         margin: '0.5em'
     }
+    const greetingStyle  = {
+        fontSize: '1.2em',
+        textDecoration: 'none',
+        color: 'grey',
+        margin: '0.5em'
+    }
     
     return (
         <div style={divStyles}>
-
+          {user ? 
+          ( 
+          <>
+            <Link style={linkStyles} to='/' onClick={handleLogOut}>Logout</Link>
+            <span style={greetingStyle}> Hello {user}</span>
+            </> 
+        )
+        :
+        (
+            <>
+            <Link style= {linkStyles} to='/register'>Register</Link>
+            <Link style= {linkStyles} to='/login'>Login</Link>
+            </>
+        )}
           <Link style={linkStyles} to='/'>Home</Link>
           <Link style={linkStyles} to='/posts/new'> Add a Post</Link>
-          {user && <Link style={linkStyles} to='/' onClick={handleLogOut}></Link>}
-          {!user &&
-          <>
-          <Link style= {linkStyles} to='/register'>Register</Link>
-          <Link style= {linkStyles} to='/login'>Login</Link>
-          </>
-          }
+    
+          
 
         </div>
     )
