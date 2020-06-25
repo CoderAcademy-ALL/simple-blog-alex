@@ -4,7 +4,6 @@ function Login(props) {
     const {handleLogin, history} = props;
     const initalState = {
         username: '',
-        email: '',
         password: ''
     }
     
@@ -38,10 +37,6 @@ function Login(props) {
                 <div style={divStyles}>
                 <label style={labelStyles}>Username</label>
                 <input style={inputStyles} type='text' name='username' onChange={handleChange} value={formState.username}></input>
-                </div>
-                <div style={divStyles}>
-                <label style={labelStyles}>Email</label>
-                <input style={inputStyles} type='email' name='email' onChange={handleChange} value ={formState.email}></input>
                 </div>
                 <div style={divStyles}>
                 <label style={labelStyles}>Password </label>
