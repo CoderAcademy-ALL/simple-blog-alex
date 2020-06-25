@@ -8,6 +8,7 @@ import Nav from './components/Nav';
 import NewBlogPost from './components/NewBlogPost';
 
 const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [blogPosts, setBlogPosts] = useState([]);
   useEffect(() => {
     setBlogPosts(blogData);
@@ -24,10 +25,15 @@ const App = () => {
     const ids = blogPosts.map(post => post._id);
     return Math.max(...ids) + 1;
   }
+
+  const handleLogOut = () => {
+    setLoggedInUser(null);
+  }
+
   return (
     <div >
       <BrowserRouter>
-      <Nav />
+      <Nav user={loggedInUser} handleLogOut={handleLogOut} />
       <h1>Many Mumbling Mice</h1>
       <Switch>
       <Route exact path='/' 

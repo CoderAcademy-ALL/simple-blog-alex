@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Nav() {
+function Nav(props) {
+    const {user, handleLogOut} = props;
+
     const divStyles = {
         display: 'flex'
     }
@@ -14,8 +16,17 @@ function Nav() {
     
     return (
         <div style={divStyles}>
+
           <Link style={linkStyles} to='/'>Home</Link>
-          <Link style={linkStyles} to='/posts/new'> Add a Post</Link>  
+          <Link style={linkStyles} to='/posts/new'> Add a Post</Link>
+          {user && <Link style={linkStyles} to='/' onClick={handleLogOut}></Link>}
+          {!user &&
+          <>
+          <Link style= {linkStyles} to='/register'>Register</Link>
+          <Link style= {linkStyles} to='/login'>Login</Link>
+          </>
+          }
+
         </div>
     )
 }
