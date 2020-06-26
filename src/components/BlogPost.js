@@ -7,10 +7,16 @@ function BlogPost(props) {
         textDecoration : 'none',
         color: 'black'
     }
-
+    
     if(!props.post) return null
     const {_id, title, modified_date, category, content} = props.post;
-    
+    const {showControls, history, deleteBlogPost} = props;
+
+    const handleDelete = (event) => {
+        console.log(event);
+        deleteBlogPost(_id);
+        history.push('/');
+    }
     return (
         <div>
          <Link to ={`/posts/${_id}`}  style={linkStyles}>
@@ -19,6 +25,8 @@ function BlogPost(props) {
         <p>{moment(modified_date).fromNow()}</p>
         <p>{category}</p>
         <p>{content}</p>
+        {showControls && <button onClick={handleDelete}>Delete</button>}
+        {showControls && <button onClick ={() => history.push(`/posts/edit/${_id}`)} >Edit</button>}
         </div>
     )
 }

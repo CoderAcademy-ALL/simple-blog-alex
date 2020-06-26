@@ -8,6 +8,7 @@ import Nav from './components/Nav';
 import NewBlogPost from './components/NewBlogPost';
 import Register from './components/Register';
 import Login from './components/Login';
+import EditBlogPost from './components/EditBlogPost';
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState('Alex');
@@ -38,6 +39,17 @@ const App = () => {
     history.push('/')
   }
 
+  const deleteBlogPost = (id) => {
+    console.log(id);
+    const newBlogPosts = blogPosts.filter(post => post._id !== parseInt(id))
+    setBlogPosts(newBlogPosts);
+  }
+
+  const updateBlogPost = (updatedPost) => {
+    const newBlogPosts = blogPosts.filter(post => post._id !== updatedPost._id)
+    setBlogPosts([...newBlogPosts, updatedPost]);
+  }
+
   return (
     <div >
       <BrowserRouter>
@@ -59,7 +71,11 @@ const App = () => {
       />
       
       <Route exact path ='/posts/:id' 
-      render={(props) => <BlogPost {...props} post={getPostById(props.match.params.id)} />}
+      render={(props) => <BlogPost {...props} post={getPostById(props.match.params.id)} showControls deleteBlogPost={deleteBlogPost} />}
+      />
+
+      <Route exact path ='/posts/edit/:id' 
+      render={(props) => <EditBlogPost {...props} post={getPostById(props.match.params.id)} updateBlogPost={updateBlogPost}  />}
       />
 
       </Switch>
