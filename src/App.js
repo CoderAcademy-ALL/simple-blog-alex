@@ -20,7 +20,7 @@ const App = () => {
   }
   
   const [store, dispatch] = useReducer(stateReducer, initialState);
-  const {blogPosts, loggedInUser} = store;
+  const {blogPosts} = store;
   
  
   useEffect(() => {
@@ -36,12 +36,6 @@ const App = () => {
     return Math.max(...ids) + 1;
   }
 
-
-
-
-  const updateBlogPost = (updatedPost) => {
-    dispatch({type: "updatePosts", data: updatedPost});
-  }
 
   return (
     <div >

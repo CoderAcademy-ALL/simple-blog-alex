@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {useGlobalSate, useGlobalState} from '../config/globalState';
+import {useGlobalState} from '../config/globalState';
 
 
 function Nav() {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useGlobalSate, useGlobalState}  from '../config/globalState';
+import {useGlobalState}  from '../config/globalState';
 
 
 function Login({history}) {
