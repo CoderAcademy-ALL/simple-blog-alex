@@ -11,6 +11,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import EditBlogPost from './components/EditBlogPost';
 import {StateContext} from './config/globalState';
+import {getUserFromSessionStorage} from './services/authServices'
 
 const App = () => {
   
@@ -26,6 +27,11 @@ const App = () => {
   useEffect(() => {
     dispatch({type: "setBlogPosts", data: blogData});
   }, [])
+
+  useEffect(() =>{
+   const user = getUserFromSessionStorage();
+   dispatch({type: "setLoggedInUser", data: user});
+  },[])
 
   const getPostById = (id) => {
     return blogPosts.find(post => post._id === parseInt(id));

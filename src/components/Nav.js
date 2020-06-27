@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useGlobalState} from '../config/globalState';
+import {setUserInSessionStorage} from '../services/authServices'
 
 
 function Nav() {
@@ -8,6 +9,7 @@ function Nav() {
     const {loggedInUser: user} = store;
     
     const handleLogOut = () => {
+        setUserInSessionStorage(null);
         dispatch({type: "setLoggedInUser", data: null});
       }
     

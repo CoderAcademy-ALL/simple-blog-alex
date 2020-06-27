@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useGlobalState}  from '../config/globalState';
+import {setUserInSessionStorage} from '../services/authServices'
 
 
 function Login({history}) {
@@ -18,6 +19,7 @@ function Login({history}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setUserInSessionStorage(formState.username);
         dispatch({type: "setLoggedInUser", data: formState.username})
         history.push('/')
     }
