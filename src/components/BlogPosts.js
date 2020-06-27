@@ -1,7 +1,10 @@
 import React from 'react';
 import BlogPost from './BlogPost';
+import {useGlobalState} from '../config/globalState';
 
-function BlogPosts({postData}) {
+function BlogPosts() {
+    const {store} = useGlobalState();
+    const {blogPosts: postData} = store;
     return (
         <div>
             {postData.sort((a,b) => b.modified_date - a.modified_date)

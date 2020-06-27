@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-
+import {useGlobalState} from '../config/globalState';
 
 function NewBlogPost(props) {
-   const {history, addBlogPost, nextId} = props
+   const {dispatch} = useGlobalState();
+   const {history, nextId} = props
     //styling
     const divStyles = {
        display: 'grid',
@@ -43,7 +44,7 @@ function NewBlogPost(props) {
             content: formState.content,
             modified_date: new Date()
         }
-        addBlogPost(newPost)
+        dispatch({type: "addBlogPost", data: newPost})
         history.push('/')
     }
    

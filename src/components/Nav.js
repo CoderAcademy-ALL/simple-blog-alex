@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {useGlobalSate, useGlobalState} from '../config/globalState';
 
-function Nav(props) {
-    const {user, handleLogOut} = props;
+
+function Nav() {
+    const {store, dispatch} = useGlobalState();
+    const {loggedInUser: user} = store;
+    
+    const handleLogOut = () => {
+        dispatch({type: "setLoggedInUser", data: null});
+      }
+    
 
     const divStyles = {
         display: 'flex'

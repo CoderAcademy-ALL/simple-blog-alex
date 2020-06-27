@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import {useGlobalState} from '../config/globalState'
 
 function EditBlogPost(props) {
-    const {history, post, updateBlogPost} = props
+    const {history,match} = props
+    const {dispatch, store} = useGlobalState();
+    const {blogPosts} = store;
+    const post = blogPosts.find(post => post._id === parseInt(match.params.id))
     //styling
     const divStyles = {
        display: 'grid',
@@ -44,7 +48,7 @@ function EditBlogPost(props) {
     const handleSubmit = (event) => {
         event.preventDefault()
         const newPost = { ...post, ...formState, modified_date: new Date()}
-        updateBlogPost(newPost)
+        dispatch({type: "updateBlogPost", data: newPost})
         console.log(newPost)
         history.push('/')
     }

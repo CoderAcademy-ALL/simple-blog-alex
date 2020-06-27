@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import {Link} from 'react-router-dom'
+import {useGlobalState} from '../config/globalState'
 
 function BlogPost(props) {
+    const {dispatch} = useGlobalState();
     const linkStyles = {
         textDecoration : 'none',
         color: 'black'
@@ -10,11 +12,11 @@ function BlogPost(props) {
     
     if(!props.post) return null
     const {_id, title, modified_date, category, content} = props.post;
-    const {showControls, history, deleteBlogPost} = props;
+    const {showControls, history} = props;
 
     const handleDelete = (event) => {
         console.log(event);
-        deleteBlogPost(_id);
+        dispatch({type: "deleteBlogPost", data: _id})
         history.push('/');
     }
     return (

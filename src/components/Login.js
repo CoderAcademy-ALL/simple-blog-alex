@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import {useGlobalSate, useGlobalState}  from '../config/globalState';
 
-function Login(props) {
-    const {handleLogin, history} = props;
+
+function Login({history}) {
+    const {dispatch} = useGlobalState()
     const initalState = {
         username: '',
         password: ''
@@ -16,7 +18,8 @@ function Login(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        handleLogin(formState, history)
+        dispatch({type: "setLoggedInUser", data: formState.username})
+        history.push('/')
     }
 
     const divStyles = {
