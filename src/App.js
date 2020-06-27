@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useReducer} from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
+import stateReducer from './config/stateReducer';
 import blogData from './data/post_data';
 import BlogPosts from './components/BlogPosts';
 import BlogPost from './components/BlogPost';
@@ -11,11 +12,33 @@ import Login from './components/Login';
 import EditBlogPost from './components/EditBlogPost';
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState('Alex');
+  
+  const initialState = {
+    loggedInUser: null,
+    blogPosts: []
+  }
+  
+  const [store, dispatch] = useReducer(stateReducer, initialState);
+
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [blogPosts, setBlogPosts] = useState([]);
   useEffect(() => {
     setBlogPosts(blogData);
   }, [])
+
+  const setUserInLocalStorage = (user) => {
+    user ? localStorage.setItem("loggedInUser", user) 
+    : localStorage.removeItem("loggedInUser");
+
+  }
+  const getUserFromLocalStorage = () => {
+   return localStorage.getItem("loggedInUser")
+  }
+
+  useEffect(() => {
+    const user = getUserFromLocalStorage(); 
+    user && setLoggedInUser(user);
+  },[])
 
   const getPostById = (id) => {
     return blogPosts.find(post => post._id === parseInt(id));
@@ -31,12 +54,14 @@ const App = () => {
 
   const handleLogOut = () => {
     setLoggedInUser(null);
+    setUserInLocalStorage(null);
   }
   
   const handleRegister = (user, history) => {
     const {username} = user;
     setLoggedInUser(username);
-    history.push('/')
+    setUserInLocalStorage(username);
+    history.push('/');
   }
 
   const deleteBlogPost = (id) => {
