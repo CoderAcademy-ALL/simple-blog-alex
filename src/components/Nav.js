@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {useGlobalState} from '../config/globalState';
 import {setUserInSessionStorage} from '../services/authServices'
-
+import PlainLink from './styled/PlainLink';
 
 function Nav() {
     const {store, dispatch} = useGlobalState();
@@ -17,12 +16,7 @@ function Nav() {
     const divStyles = {
         display: 'flex'
     }
-    const linkStyles = {
-        fontSize: '1.2em',
-        textDecoration: 'none',
-        color: 'black',
-        margin: '0.5em'
-    }
+
     const greetingStyle  = {
         fontSize: '1.2em',
         textDecoration: 'none',
@@ -35,19 +29,19 @@ function Nav() {
           {user ? 
           ( 
           <>
-            <Link style={linkStyles} to='/' onClick={handleLogOut}>Logout</Link>
+            <PlainLink to='/' onClick={handleLogOut}>Logout</PlainLink>
             <span style={greetingStyle}> Hello {user}</span>
             </> 
         )
         :
         (
             <>
-            <Link style= {linkStyles} to='/register'>Register</Link>
-            <Link style= {linkStyles} to='/login'>Login</Link>
+            <PlainLink to='/register'>Register</PlainLink>
+            <PlainLink to='/login'>Login</PlainLink>
             </>
         )}
-          <Link style={linkStyles} to='/'>Home</Link>
-          <Link style={linkStyles} to='/posts/new'> Add a Post</Link>
+          <PlainLink  to='/'>Home</PlainLink>
+          <PlainLink to='/posts/new'> Add a Post</PlainLink>
     
           
 
