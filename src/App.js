@@ -51,7 +51,7 @@ const App = () => {
       <Nav />
       <h1>Many Mumbling Mice</h1>
       <Switch>
-      <PrivateRoute exact path='/' component={BlogPosts} />
+      <Route exact path='/' component={BlogPosts} />
       <Route exact path ='/register' component={Register}/>
       <Route exact path ='/login' component={Login}/>
       <PrivateRoute 
