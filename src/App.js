@@ -1,5 +1,6 @@
 import React, {useEffect, useReducer} from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import PrivateRoute from './components/PrivateRoute';
 
 import stateReducer from './config/stateReducer';
 import blogData from './data/post_data';
@@ -50,12 +51,15 @@ const App = () => {
       <Nav />
       <h1>Many Mumbling Mice</h1>
       <Switch>
-      <Route exact path='/' component={BlogPosts} />
+      <PrivateRoute exact path='/' component={BlogPosts} />
       <Route exact path ='/register' component={Register}/>
       <Route exact path ='/login' component={Login}/>
-      <Route exact path ='/posts/new'
-      render = {(props) => <NewBlogPost {...props}  getNextId={getNextId()}  />}
-      />
+      <PrivateRoute 
+      exact path ='/posts/new' 
+      component={NewBlogPost} 
+      options={{nextId: getNextId()}}
+       />
+    
       
       <Route exact path ='/posts/:id' 
       render={(props) => <BlogPost {...props} post={getPostById(props.match.params.id)} showControls/>}
