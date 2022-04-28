@@ -1,6 +1,9 @@
+## README CHJANGE
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the basic template.
 
 ## What's in the basic template?
+
 - It includes node-sass, and a style.scss (and removes all .css files)
 - It doesn't use serviceWorker
 - It replaces the react favicon with a flower of life icon
